@@ -9,19 +9,26 @@ User authentication library:
 * Use the credentials json file in a command line program
 * Automatically refresh crredentials while command line program running
 
-[Github Page](https://github.com/argentiapparatus/blurge.dart)
+[Github Page](https://github.com/ArgentiApparatus/gcloud_cl_user_auth.dart)
 
 ## Using the Utility:
 
 ### Activate the Utility:
 
-From the directory that contains the package directory:
+    pub global activate path/to/gcloud_user_auth -s path
 
-    pub global activate gcloud_user_auth -s path
+### Set up Google OAuth Command Line Client
 
-### Getting Credentials:
+Go to Google API Manager credentials page https://console.developers.google.com/apis/credentials to create Google API client credentials.
 
-Create a client json file contaning the Google cloud client identifier and secret
+* Credentials type: OAuth Client ID
+* Application type: Other
+
+API client will be assigned a _client identifier_ and a _client secret_.
+
+### Authenticating the client
+
+Create a client json file containing the client identifier and secret
 
 ````json
 {
@@ -32,7 +39,7 @@ Create a client json file contaning the Google cloud client identifier and secre
 }
 ````
 
-Run the utility to authenticate and get credentials:
+Run the authentiction utility to authenticate and get credentials:
 
 Example:
 
@@ -46,7 +53,9 @@ https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=....
 
 Paste the URL in a browser, authenticate with a Google user account.
 
-The utility will write a credentials file. A credentials file can be reused as a client file to reauthenticate with a different account or scopes.
+The utility will write a credentials json file.
+
+Note: The credentials file can be used as an authentiction utility input client json file.
 
 ### Refreshing Credentials:
 
@@ -60,7 +69,7 @@ Example:
 
 ### Dependencies:
 
-blurge.dart is not (yet) available from [pub.dartlang.org](https://pub.dartlang.org/) and must be had from the Github page instead.
+The library is not available from [pub.dartlang.org](https://pub.dartlang.org/) and must be had from the Github page instead.
 
 To get the latest commited version (which may or may not be broken):
 
@@ -68,16 +77,16 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  blurge:
-    git: https://github.com/argentiapparatus/blurge.dart.git
+  gcloud_cl_user_auth:
+    git: https://github.com/argentiapparatus/gcloud_cl_user_auth.dart.git
 ```
 
 To get a specific release, tag or branch (which should not be broken):
 
 ```yaml
 dependencies:
-  blurge:
-    git: https://github.com/argentiapparatus/blurge.dart.git
+  gcloud_cl_user_auth:
+    git: https://github.com/argentiapparatus/gcloud_cl_user_auth.dart.git
     ref: some-identifer
 ```
 
@@ -90,7 +99,7 @@ for more details.
 
 ```dart
 import 'package:googleapis_auth/auth.dart';
-import 'package:blurge/auth_manager.dart';
+import 'package:gcloud_cl_user_auth/auth_manager.dart';
 
 main(List<String> args) async {
 
